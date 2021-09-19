@@ -16,6 +16,16 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const json = localStorage.getItem('contacts');
+    const contacts = JSON.parse(json);
+    this.setState(() => ({ contacts }));
+  }
+  componentDidUpdate() {
+    const json = JSON.stringify(this.state.contacts);
+    localStorage.setItem('contacts', json);
+  }
+
   formSubmitHandler = ({ name, number }) => {
     const { contacts } = this.state;
     const newContact = {
